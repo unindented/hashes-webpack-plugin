@@ -13,19 +13,19 @@ var inputFile = path.resolve(inputFolder, 'entry.js')
 var outputFolder = path.resolve(__dirname, 'output')
 var outputFile = path.resolve(outputFolder, 'bundle.js')
 
-var defaultCompilerOptions = {
-  entry: inputFile,
+var defaultCompilerOptions = function (options) {
+  return {
+    entry: inputFile,
 
-  output: {
-    path: outputFolder,
-    filename: 'bundle.js'
-  },
+    output: {
+      path: outputFolder,
+      filename: 'bundle.js'
+    },
 
-  plugins: [
-    new HashesPlugin('[path][name]-[hash].[ext]', {
-      algorithm: 'md5'
-    })
-  ]
+    plugins: [
+      new HashesPlugin('[path][name]-[hash].[ext]', options)
+    ]
+  }
 }
 
 describe('HashesWebpackPlugin', function () {
@@ -34,7 +34,7 @@ describe('HashesWebpackPlugin', function () {
   })
 
   it('generates normal files', function (done) {
-    var compiler = webpack(defaultCompilerOptions)
+    var compiler = webpack(defaultCompilerOptions())
     compiler.run(function (err) {
       if (err) {
         return done(err)
@@ -46,7 +46,7 @@ describe('HashesWebpackPlugin', function () {
   })
 
   it('generates hashed files', function (done) {
-    var compiler = webpack(defaultCompilerOptions)
+    var compiler = webpack(defaultCompilerOptions())
     compiler.run(function (err) {
       if (err) {
         return done(err)
@@ -54,6 +54,22 @@ describe('HashesWebpackPlugin', function () {
 
       var contents = fs.readFileSync(outputFile, 'utf-8')
       var hash = crypto.createHash('md5').update(contents).digest('hex')
+      var outputHashedFile = path.resolve(outputFolder, 'bundle-' + hash + '.js')
+
+      expect(fs.accessSync(outputHashedFile)).to.not.throw
+      done()
+    })
+  })
+
+  it('generates hashed files with a specific algorithm', function (done) {
+    var compiler = webpack(defaultCompilerOptions({algorithm: 'sha512'}))
+    compiler.run(function (err) {
+      if (err) {
+        return done(err)
+      }
+
+      var contents = fs.readFileSync(outputFile, 'utf-8')
+      var hash = crypto.createHash('sha512').update(contents).digest('hex')
       var outputHashedFile = path.resolve(outputFolder, 'bundle-' + hash + '.js')
 
       expect(fs.accessSync(outputHashedFile)).to.not.throw
