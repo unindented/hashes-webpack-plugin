@@ -1,7 +1,7 @@
 {
   "name": "hashes-webpack-plugin",
   "description": "Generate hashed versions of all files in a compilation.",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": {
     "name": "Daniel Perez Alvarez",
     "email": "unindented@gmail.com",
