@@ -27,7 +27,7 @@
   "devDependencies": {
     "async": "^1.5",
     "chai": "^3.3",
-    "eslint": "^2.2.0",
+    "eslint": "^3.0.0",
     "eslint-config-standard": "^5.1.0",
     "eslint-plugin-promise": "^1.0.8",
     "eslint-plugin-standard": "^1.3",
