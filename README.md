@@ -1,4 +1,4 @@
-# Hashes plugin for webpack [![Version](https://img.shields.io/npm/v/hashes-webpack-plugin.svg)](https://www.npmjs.com/package/hashes-webpack-plugin) [![Build Status](https://img.shields.io/travis/unindented/hashes-webpack-plugin.svg)](http://travis-ci.org/unindented/hashes-webpack-plugin) [![Dependency Status](https://img.shields.io/gemnasium/unindented/hashes-webpack-plugin.svg)](https://gemnasium.com/unindented/hashes-webpack-plugin)
+# Hashes plugin for webpack [![Version](https://img.shields.io/npm/v/hashes-webpack-plugin.svg)](https://www.npmjs.com/package/hashes-webpack-plugin) [![Build Status](https://img.shields.io/travis/unindented/hashes-webpack-plugin.svg)](http://travis-ci.org/unindented/hashes-webpack-plugin)
 
 Generates hashed versions of all files in a compilation.
 
